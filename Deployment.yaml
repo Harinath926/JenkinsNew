@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+
+  name: hari
+  
+  namespace: dev
+
+spec:
+
+  selector:
+
+    matchLabels:
+
+      run: hari
+
+  replicas: 1
+
+  template:
+
+    metadata:
+
+      labels:
+
+        run: hari
+
+    spec:
+
+      containers:
+
+      - name: hari
+
+        image: harinath926/hari
+
+        ports:
+
+        - containerPort: 5000

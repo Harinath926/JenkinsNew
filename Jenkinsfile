@@ -64,6 +64,11 @@ spec:
     sh 'kubectl apply -f service.yaml'
         }
     }
+    steps{
+        script{
+            sh 'helm update .'
+        }
+    }
 }
  }
 }

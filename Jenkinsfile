@@ -64,6 +64,11 @@ spec:
     sh 'kubectl apply -f service.yaml'
         }
     }
+    stage('helm deploy'){
+        steps{
+            sh ' helm update .'
+        }
+    }
 }
  }
 }

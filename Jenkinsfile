@@ -56,12 +56,10 @@ spec:
             sh 'docker push harinath926/hari'
            }
     }
-    stage('Deploy')
-{
-    steps{
-        script{
-    sh 'kubectl apply -f Deployment.yaml'
-    sh 'kubectl apply -f service.yaml'
+    stage('Deploy'){
+        steps{
+             sh 'kubectl apply -f Deployment.yaml'
+             sh 'kubectl apply -f service.yaml'
         }
     }
     stage('helm deploy'){

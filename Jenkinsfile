@@ -74,7 +74,7 @@ spec:
        }
         stage('helm') {
             steps {
-                sh 'helm upgrade --install glams'
+                sh 'helm upgrade --install glams1 glams'
         }
     }
  }

@@ -75,8 +75,7 @@ spec:
        }
         stage('helm') {
             steps {
-                sh 'rm -f *.tgz'
-                sh 'helm install demohelm .'
+                sh 'helm install Jenkinsnew .'
         }
     }
  }

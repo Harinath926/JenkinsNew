@@ -56,8 +56,7 @@ spec:
             sh 'docker push harinath926/hari'
            }
     }
-       stage('Deploy')
-{
+       stage('Deploy'){
     steps{
         script{
     sh 'kubectl apply -f Deployment.yaml'

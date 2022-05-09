@@ -57,13 +57,13 @@ spec:
            }
     }
     stage('Deploy'){
-        steps{
+        steps {
              sh 'kubectl apply -f Deployment.yaml'
              sh 'kubectl apply -f service.yaml'
         }
     }
     stage('helm install'){
-        steps{
+        steps {
              
         }
       }

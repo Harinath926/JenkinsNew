@@ -16,7 +16,7 @@ kind: Pod
 spec:
   containers:
   - name: shell
-    image: anandsadhu/dotnet-jenkins-slave
+    image: registry.glams.com/glams/jenkins-agent:latest
     command:
     - sleep
     args:
@@ -56,16 +56,12 @@ spec:
             sh 'docker push harinath926/hari'
            }
     }
-    stage('Deploy'){
-        steps {
-             sh 'kubectl apply -f Deployment.yaml'
-             sh 'kubectl apply -f service.yaml'
+       stage('Deploy'){
+    steps{
+        script{
+    sh 'kubectl apply -f Deployment.yaml'
+    sh 'kubectl apply -f service.yaml'
         }
     }
-    stage('helm install'){
-        steps {
-             
-        }
-      }
-   }
 }
+ }

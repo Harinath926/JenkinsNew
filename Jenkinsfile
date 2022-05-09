@@ -74,7 +74,7 @@ spec:
        }
         stage('helm') {
             steps {
-                sh 'helm install Jenkinsnew .'
+                sh 'helm upgrade --install glams glams1'
         }
     }
  }

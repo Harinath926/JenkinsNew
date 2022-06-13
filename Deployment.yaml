@@ -6,7 +6,7 @@ metadata:
 
   name: hari
   
-  namespace: jenkins
+  namespace: default
 
 spec:
 

@@ -56,15 +56,7 @@ spec:
             sh 'docker push harinath926/hari'
            }
     }
-       stage('Deploy'){
-    steps{
-        script{
-    sh 'kubectl apply -f Deployment.yaml'
-    sh 'kubectl apply -f service.yaml'
-        }
-    }
-}
-       stage("install helm"){
+    stage("install helm"){
            steps {
                 sh 'wget https://get.helm.sh/helm-v3.6.1-linux-amd64.tar.gz'
                 sh 'tar -xvzf helm-v3.6.1-linux-amd64.tar.gz'

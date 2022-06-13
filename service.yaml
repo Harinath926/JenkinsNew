@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: hari
   
-  namespace: default
+  namespace: jenkins
   
   labels:
     run: hari

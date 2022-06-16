@@ -1,0 +1,73 @@
+// Uses Declarative syntax to run commands inside a container.
+pipeline {
+    agent {
+        kubernetes {
+            // Rather than inline YAML, in a multibranch Pipeline you could use: yamlFile 'jenkins-pod.yaml'
+            // Or, to avoid YAML:
+            // containerTemplate {
+            //     name 'shell'
+            //     image 'ubuntu'
+            //     command 'sleep'
+            //     args 'infinity'
+            // }
+            yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: shell
+    image: harinath926/haripy
+    command:
+    - sleep
+    args:
+    - infinity
+    tty: true
+    resources:
+      requests:
+        memory: "2Gi"
+    volumeMounts:
+     - name: haripy
+       mountPath: /var/run/haripy
+  volumes:
+    - name: haripy
+      hostPath:
+        path: /var/run/haripy       
+'''
+            // Can also wrap individual steps:
+            // container('shell') {
+            //     sh 'hostname'
+            // }
+            defaultContainer 'shell'
+        }
+    }
+   stages {
+        stage('docker build') {
+            steps {
+                sh 'docker build -t harinath926/haripy .'
+       }
+    }
+   stage('docker login') {
+       steps {
+            sh 'docker login -u harinath926 -p Chotu@9999'
+        }
+    }
+    stage('docker push') {
+        steps {
+            sh 'docker push harinath926/haripy'
+           }
+    }
+    stage("install helm"){
+           steps {
+                sh 'wget https://get.helm.sh/helm-v3.6.1-linux-amd64.tar.gz'
+                sh 'tar -xvzf helm-v3.6.1-linux-amd64.tar.gz'
+                sh 'cp linux-amd64/helm /usr/bin'
+                sh 'helm version'
+            }
+       }
+        stage('helm') {
+            steps {
+                sh 'helm upgrade --install glams6 glams'
+        }
+    }
+ }
+}

@@ -53,7 +53,7 @@ spec:
     }
     stage('docker push') {
         steps {
-            sh 'docker push harinath926/hari'
+            sh 'docker push harinath926/haripy'
            }
     }
     stage("install helm"){
@@ -64,10 +64,5 @@ spec:
                 sh 'helm version'
             }
        }
-        stage('helm') {
-            steps {
-                sh 'helm upgrade --install glams6 glams'
-        }
-    }
  }
 }

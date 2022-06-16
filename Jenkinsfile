@@ -40,6 +40,11 @@ spec:
             defaultContainer 'shell'
         }
     }
+    environment {
+
+DOCKERHUB_CREDENTIALS = credentials('DOCKER')
+
+}
    stages {
         stage('docker build') {
             steps {
@@ -48,7 +53,7 @@ spec:
     }
    stage('docker login') {
        steps {
-            sh 'docker login -u harinath926 -p Chotu@9999'
+           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin '
         }
     }
     stage('docker push') {
@@ -64,10 +69,6 @@ spec:
                 sh 'helm version'
             }
        }
-        stage('helm') {
-            steps {
-                sh 'helm upgrade --install glams6 glams'
-        }
-    }
+   
  }
 }
